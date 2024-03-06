@@ -1,14 +1,19 @@
 # flake8: noqa
+import os
 from pathlib import Path
-
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-s)-x0)3)3#lh(jgwo!fi-yszy0vu-=w_t7-*er@ix2@c^no=@d'
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'DEFAULT_SECRET_KEY')
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+# if os.getenv('DEBUG', '').lower == 'true':
+#     DEBUG = True
+# else:
+#     DEBUG = False
+
+ALLOWED_HOSTS = ['127.0.0.1']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -18,6 +23,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'onboarding.apps.OnboardingConfig',
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -28,7 +34,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
+
+INTERNAL_IPS = [
+    '127.0.0.1',
+] 
 
 ROOT_URLCONF = 'dinamic_forms.urls'
 
