@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}
+  Онбординг
+{% endblock %}
+{% block content %}
+  <div class="col d-flex justify-content-center">
+    <div class="card" style="width: 40rem;">
+      <div class="card-header">
+        Добро пожаловать на онбординг.
+      </div>
+      <div class="card-body">
+        <p>
+            Опросы:
+        </p>
+        {% for forms in page_obj %}
+        <article class="mb-5">
+          Опрос: {{ forms.title }} <a href="{% url 'onboarding:onboarding_completion' forms.tag %}" class="card-link">Перейти к опросу</a>
+        </article>
+        {% endfor %}
+        <p>
+          Для прохождения опроса пройдите по ссылке сверху!
+        </p>
+      </div>
+    </div>
+  </div>
+{% endblock %}

@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from django.db import forms
+from django import forms
 
 from onboarding.models import Record, RecordData, Template, TemplateField
 
@@ -35,6 +35,10 @@ class CDBForm(forms.Form):
                 )
             elif field.type == "U":
                 self.base_fields[field.tag] = forms.URLField(
+                    label=field.title, required=field.required
+                )
+            elif field.type == 'I':
+                self.base_fields[field.tag] = forms.IntregerField(
                     label=field.title, required=field.required
                 )
         forms.Form.__init__(self, *args, **kwargs)

@@ -2,16 +2,16 @@
 import os
 from pathlib import Path
 
+from dotenv import load_dotenv
+
+env_path = Path('.') / '.env'
+load_dotenv(dotenv_path=env_path)
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'DEFAULT_SECRET_KEY')
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
 DEBUG = True
-
-# if os.getenv('DEBUG', '').lower == 'true':
-#     DEBUG = True
-# else:
-#     DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1']
 
@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'onboarding.apps.OnboardingConfig',
+    'django_bootstrap5',
     'debug_toolbar',
 ]
 
